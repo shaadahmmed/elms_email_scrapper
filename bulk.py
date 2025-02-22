@@ -103,6 +103,8 @@ for course in course_list:
     print(total_participant)
 
     count = 0
+    if not os.path.exists("emails"):
+        os.makedirs("emails")
 
     with open(f"emails/{course['id']}.txt", "w") as file:
         file.write(f"{course['fullname']}\n\n")
@@ -114,7 +116,7 @@ for course in course_list:
 
             for single_link in all_links:
                 if "mailto" in single_link["href"]:
-                    file.write(single_link.text)
+                    file.write(f"{single_link.text}\n")
                     count = count + 1
                     break
 

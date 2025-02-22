@@ -53,8 +53,9 @@ total_participant = course_soup.find("p", {"data-region": "participant-count"}).
 print(f"Course: {title}")
 print(total_participant)
 
-emails = []
 count = 0
+if not os.path.exists("emails"):
+    os.makedirs("emails")
 
 with open(f"emails/{course_id}.txt", "w") as file:
     file.write(f"{title}\n\n")
@@ -66,7 +67,7 @@ with open(f"emails/{course_id}.txt", "w") as file:
 
         for single_link in all_links:
             if "mailto" in single_link["href"]:
-                file.write(single_link.text)
+                file.write(f"{single_link.text}\n")
                 count = count + 1
 
 print(f"Total Email Found: {count}")
