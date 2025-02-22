@@ -104,7 +104,7 @@ for course in course_list:
 
     count = 0
 
-    with open(f"{course['id']}.txt", "w") as file:
+    with open(f"emails/{course['id']}.txt", "w") as file:
         file.write(f"{course['fullname']}\n\n")
         for link in links:
             profile_link = link["href"]

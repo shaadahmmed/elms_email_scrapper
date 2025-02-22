@@ -56,7 +56,7 @@ print(total_participant)
 emails = []
 count = 0
 
-with open(f"{course_id}.txt", "w") as file:
+with open(f"emails/{course_id}.txt", "w") as file:
     file.write(f"{title}\n\n")
     for link in links:
         profile_link = link["href"]
