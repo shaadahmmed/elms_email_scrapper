@@ -102,24 +102,21 @@ for course in course_list:
     print(f"Course: {course['fullname']}")
     print(total_participant)
 
-    emails = []
     count = 0
 
-    for link in links:
-        profile_link = link["href"]
-        profile_response = session.get(profile_link)
-        profile_soup = BeautifulSoup(profile_response.text, "lxml")
-        all_links = profile_soup.find_all("a", href=True)
-
-        for single_link in all_links:
-            if "malito" in single_link["href"]:
-                emails.append(single_link.text)
-                count = count + 1
-
     with open(f"{course['id']}.txt", "w") as file:
-        file.write(course["fullname"])
-        for email in emails:
-            file.write(email + "\n")
+        file.write(f"{course['fullname']}\n\n")
+        for link in links:
+            profile_link = link["href"]
+            profile_response = session.get(profile_link)
+            profile_soup = BeautifulSoup(profile_response.text, "lxml")
+            all_links = profile_soup.find_all("a", href=True)
+
+            for single_link in all_links:
+                if "mailto" in single_link["href"]:
+                    file.write(single_link.text)
+                    count = count + 1
+                    break
 
     print(f"Total Email Found: {count}")
     print(f"Emails in: {course['id']}.txt")
