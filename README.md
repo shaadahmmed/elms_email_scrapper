@@ -1,6 +1,6 @@
 # UIU eLMS Mail Scrapper
 
-Helps you to extract the mails of  the course participants. 
+Helps you to extract the mails of  the course participants.
 
 All you need is your eLMS `username` and `password`
 
@@ -32,15 +32,15 @@ pip3 install -r requirements.txt
 
 ##### Set up the environment
 
-Open `.env` and edit the 
+Open `.env` and edit the
 
-`username` enter your UIU student ID
+`STU_ID` enter your UIU student ID
 
-`password` enter your eLMS password
+`PASS` enter your eLMS password
 
-`course_id` if you are extracting single course then you need it otherwise leave it blank
+`COURSE_ID` if you are extracting single course then you need it otherwise leave it blank
 
-you can find the `course_id` by
+you can find the `COURSE_ID` by
 
 1. Open any browser
 2. Login to eLMS

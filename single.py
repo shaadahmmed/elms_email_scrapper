@@ -4,11 +4,15 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-username = os.getenv("username")
-password = os.getenv("password")
-course_id = os.getenv("course_id")
+username = os.getenv("STU_ID")
+password = os.getenv("PASS")
+course_id = os.getenv("COURSE_ID")
 login_url = "https://elms.uiu.ac.bd/login/index.php"
 course_url = f"https://elms.uiu.ac.bd/user/index.php?page=0&perpage=5000&contextid=0&id={course_id}&newcourse"
+
+if course_id == "" or username == "" or password == "":
+    print("Please enter necessary data in .env")
+    exit()
 
 session = requests.Session()
 
@@ -36,7 +40,7 @@ payload = {
 
 login_response = session.post(login_url, data=payload, headers=headers)
 
-if "Dashboard" in login_response.text or login_response.url != login_url:
+if "Dashboard" in login_response.text or "login" not in login_url:
     print("Login successful!")
     print("Session Started")
 else:

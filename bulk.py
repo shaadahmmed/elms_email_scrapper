@@ -5,10 +5,13 @@ import os
 import re
 
 load_dotenv()
-username = os.getenv("username")
-password = os.getenv("password")
+username = os.getenv("STU_ID")
+password = os.getenv("PASS")
 login_url = "https://elms.uiu.ac.bd/login/index.php"
 
+if username == "" or password == "":
+    print("Please enter necessary data in .env")
+    exit()
 
 session = requests.Session()
 
@@ -34,10 +37,12 @@ payload = {
     "password": password,
 }
 
+print(payload)
+
 login_response = session.post(login_url, data=payload, headers=headers)
 dashboard_soup = ""
 
-if "Dashboard" in login_response.text or login_response.url != login_url:
+if "Dashboard" in login_response.text or "login" not in login_response.url:
     dashboard_soup = BeautifulSoup(login_response.text, "lxml")
     print("Login successful!")
     print("Session Started")
@@ -47,6 +52,8 @@ else:
 
 script_tags = dashboard_soup.find_all("script")
 sesskey = ""
+print(login_response.url)
+exit()
 
 for script in script_tags:
     if script.string:
