@@ -3,14 +3,14 @@ import requests
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+load_dotenv(override=True)
 username = os.getenv("STU_ID")
 password = os.getenv("PASS")
 course_id = os.getenv("COURSE_ID")
 login_url = "https://elms.uiu.ac.bd/login/index.php"
 course_url = f"https://elms.uiu.ac.bd/user/index.php?page=0&perpage=5000&contextid=0&id={course_id}&newcourse"
 
-if course_id == "" or username == "" or password == "":
+if not course_id or not username or not password:
     print("Please enter necessary data in .env")
     exit()
 
